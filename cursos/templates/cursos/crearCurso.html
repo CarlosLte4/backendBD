@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Curso</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Crear un Nuevo Curso</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="nombre">Nombre del Curso:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <button type="submit">Crear</button>
+        </form>
+        <button onclick="window.location.href='{}'">Volver a Mis Cursos</button>
+    </div>
+</body>
+</html>
