@@ -78,10 +78,11 @@
 <body>
     <div class="login-container">
         <h1>Login</h1>
-        <form action="/login" method="POST">
+        <form action="" method="POST"> <!-- action vacío envía el formulario a la URL actual -->
+            {% csrf_token %} <!-- Token CSRF obligatorio -->
             <div class="form-group">
-                <label for="username">Correo</label>
-                <input type="text" id="username" name="username" required>
+                <label for="email">Correo</label>
+                <input type="email" id="email" name="email" required> <!-- Cambiado a "email" -->
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -90,7 +91,7 @@
             <button type="submit" class="login-btn">Login</button>
         </form>
         <div class="register-link">
-            <p>No tienes una cuenta? <a href="{% url 'registroP' %}">Registrate aqui</a>.</p>
+            <p>No tienes una cuenta? <a href="{% url 'registroP' %}">Regístrate aquí</a>.</p>
         </div>
     </div>
 </body>

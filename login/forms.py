@@ -21,5 +21,16 @@ class FormularioP(UserCreationForm):
                 direccion=self.cleaned_data['direccion']
             )
         return user
+    
+from django import forms
 
-        
+
+class FormularioLoginP(forms.Form):
+    email = forms.EmailField(
+        label="Correo Electrónico",
+        widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "Ingresa tu correo"})
+    )
+    password = forms.CharField(
+        label="Contraseña",
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": "Ingresa tu contraseña"})
+    )
