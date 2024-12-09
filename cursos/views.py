@@ -4,14 +4,14 @@ from login.models import Profesor
 # Create your views here.
 
 # Create your views here.
-def cursos(request):
+def cursosP(request):
     if 'profesor_id' not in request.session:
         return redirect('login')
     profesor_id=request.session['profesor_id']
     try: 
         profesor=Profesor.objects.get(id=profesor_id)
         cursos=Curso.objects.filter(profesor=profesor.user)
-        return render(request,"cursos/cursosP.html",{'cursos':cursos})
+        return render(request,"cursos/cursosP.html",{'cursosP':cursosP})
     except Profesor.DoesNotExist:
         del request.session['profesor_id']
         return redirect('login')
@@ -36,4 +36,7 @@ def crearCurso(request):
         except Profesor.DoesNotExist:
             return redirect('login')
     return render(request, 'cursos/crearCurso.html')
+
+def cursosE(request):
+    return render(request,'cursos/cursosE.html')
 
