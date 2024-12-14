@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Curso
 from login.models import Profesor
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 # Create your views here.
@@ -11,7 +12,7 @@ def cursosP(request):
     try: 
         profesor=Profesor.objects.get(id=profesor_id)
         cursos=Curso.objects.filter(profesor=profesor.user)
-        return render(request,"cursos/cursosP.html",{'cursosP':cursosP})
+        return render(request,"cursos/cursosP.html",{'cursos':cursos})
     except Profesor.DoesNotExist:
         del request.session['profesor_id']
         return redirect('login')
@@ -25,12 +26,13 @@ def crearCurso(request):
         profesor_id=request.session['profesor_id']
         try:
             profesor=Profesor.objects.get(id=profesor_id)
+            usuario=profesor.user
             if nombre:
                 Curso.objects.create(
                     nombre=nombre,
-                    profesor=profesor.user
+                    profesor=usuario
                 )
-                return redirect('Cursos')
+                return redirect('CursosP')
             else:
                 return render(request,'cursos/crearCurso.html',{'error':'Debe ingresar un nombrer para el curso'})
         except Profesor.DoesNotExist:
@@ -39,4 +41,11 @@ def crearCurso(request):
 
 def cursosE(request):
     return render(request,'cursos/cursosE.html')
+
+def detalleCurso(request, curso_id):
+    try: 
+        curso = Curso.objects.get(id=curso_id)
+        return render(request, 'cursos/detalleCurso.html',{'curso':curso})
+    except Curso.DoesNotExist:
+        return render(request,'cursoP')
 

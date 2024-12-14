@@ -86,8 +86,8 @@
             {% if cursos %}
                 {% for curso in cursos %}
                 <li class="course-item">
-                    <span>{{ curso.nombre }}</span>
-                    <button onclick="eliminarCurso('{{ curso.id }}')">Eliminar</button>
+                    <a href="{% url 'detalleCurso' curso.id %}">{{ curso.nombre }}</a>
+                    <button onclick="event.stopPropagation(); eliminarCurso('{{ curso.id }}')">Eliminar</button>
                 </li>
                 {% endfor %}
             {% else %}
